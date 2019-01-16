@@ -1,8 +1,8 @@
-import styled from "styled-components/native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import styled from "styled-components/native"
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons"
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -20,19 +20,19 @@ export const Container = styled.View`
   shadow-offset: 5px 10px;
   shadow-opacity: 0.03;
   shadow-radius: 2px;
-`;
+`
 
 export const Title = styled.Text`
   margin-top: 8px;
   text-align: center;
   font-weight: bold;
   color: #4257b2;
-`;
+`
 
 export const MaterialCommunityIcon = styled(MaterialCommunityIcons)`
   color: #4257b2;
-`;
+`
 
 export const MaterialIcon = styled(MaterialIcons)`
   color: #4257b2;
-`;
+`

@@ -1,34 +1,30 @@
-import React from "react";
+import React from "react"
+import { TouchableOpacity } from "react-native"
 
-import {
-  Container,
-  Title,
-  MaterialCommunityIcon,
-  MaterialIcon
-} from "./styles";
+import { Container, Title, MaterialCommunityIcon, MaterialIcon } from "./styles"
 
 export default class Button extends React.Component {
   renderIcon = () => {
-    const { iconName, iconLibrary } = this.props;
+    const { iconName, iconLibrary } = this.props
 
     if (iconLibrary === "MaterialIcons") {
-      return <MaterialIcon name={iconName} size={48} />;
+      return <MaterialIcon name={iconName} size={48} />
     } else if (iconLibrary === "MaterialCommunityIcons") {
-      return <MaterialCommunityIcon name={iconName} size={48} />;
+      return <MaterialCommunityIcon name={iconName} size={48} />
     } else {
-      return "";
+      return ""
     }
-  };
+  }
 
   render() {
-    const { style, name, id } = this.props;
+    const { name, id, ...rest } = this.props
 
     return (
-      <Container style={style}>
+      <Container {...rest}>
         {this.renderIcon()}
         {/* <MaterialCommunityIcon name="cards" size={48} /> */}
         <Title>{name}</Title>
       </Container>
-    );
+    )
   }
 }

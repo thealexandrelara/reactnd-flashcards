@@ -1,6 +1,5 @@
 import React from "react"
-import { StatusBar, Animated, Text } from "react-native"
-import { getStatusBarHeight } from "react-native-status-bar-height"
+import { StatusBar } from "react-native"
 
 import {
   Container,
@@ -13,8 +12,23 @@ import {
 import Button from "./components/Button"
 
 export default class DeckDetail extends React.Component {
-  static navigationOptions = {
-    title: "Deck"
+  static navigationOptions = ({ navigation }) => {
+    // console.log(navigation)
+
+    return {
+      headerTitle: ""
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log(prevProps)
+  }
+
+  navigateTo = name => {
+    console.log(name)
+    const { navigation } = this.props
+
+    navigation.navigate(name)
   }
 
   render() {
@@ -30,17 +44,18 @@ export default class DeckDetail extends React.Component {
         <ButtonsWrapper>
           <ButtonsContainer>
             <Button
-              name="Flashcards"
+              name="Start a Quiz"
               iconName="cards"
               iconLibrary="MaterialCommunityIcons"
             />
           </ButtonsContainer>
           <ButtonsContainer>
             <Button
-              name="Add card"
+              name="Create New Question"
               iconName="library-add"
               iconLibrary="MaterialIcons"
               style={{ marginRight: 4 }}
+              onPress={() => this.navigateTo("AddCardModal")}
             />
             <Button
               name="Edit cards"

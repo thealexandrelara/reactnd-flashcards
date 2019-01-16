@@ -4,6 +4,8 @@ import { createStackNavigator, createAppContainer } from "react-navigation"
 
 import HomeScreen from "../screens/home"
 import DeckDetailScreen from "../screens/deckDetail"
+import AddDeckScreen from "../screens/addDeck"
+import AddCardScreen from "../screens/addCard"
 
 const defaultNavigationOptions = {
   headerStyle: {
@@ -16,13 +18,19 @@ const defaultNavigationOptions = {
   headerBackTitle: null
 }
 
-const MainAppNavigator = createStackNavigator(
+const MainNavigator = createStackNavigator(
   {
     Home: {
-      screen: HomeScreen
+      screen: HomeScreen,
+      navigationOptions: {
+        header: () => null
+      }
     },
     DeckDetail: {
-      screen: DeckDetailScreen
+      screen: DeckDetailScreen,
+      navigationOptions: {
+        headerTitle: "Deck"
+      }
     }
   },
   {
@@ -30,4 +38,29 @@ const MainAppNavigator = createStackNavigator(
   }
 )
 
-export default createAppContainer(MainAppNavigator)
+const RootNavigator = createStackNavigator(
+  {
+    Home: {
+      screen: MainNavigator
+    },
+    AddDeckModal: {
+      screen: AddDeckScreen,
+      navigationOptions: {
+        title: "Add Deck"
+      }
+    },
+    AddCardModal: {
+      screen: AddCardScreen,
+      navigationOptions: {
+        title: "Add Card"
+      }
+    }
+  },
+  {
+    defaultNavigationOptions,
+    mode: "modal",
+    headerMode: "none"
+  }
+)
+
+export default createAppContainer(RootNavigator)
