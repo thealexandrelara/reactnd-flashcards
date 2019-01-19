@@ -5,12 +5,14 @@ import { Container, Title, CardsCount } from "./styles"
 
 export default class Item extends React.Component {
   render() {
-    const { name, id, ...rest } = this.props
+    const { name, id, cardsCount, ...rest } = this.props
 
     return (
       <Container {...rest}>
         <Title>{name}</Title>
-        <CardsCount>{3} cards</CardsCount>
+        <CardsCount>
+          {cardsCount} {cardsCount.length < 2 ? "card" : "cards"}
+        </CardsCount>
       </Container>
     )
   }

@@ -1,12 +1,15 @@
 import { combineReducers } from "redux"
 
-import decks from "./posts"
+import decks, { Selectors as DecksSelectors } from "./decks"
 // import comments, { Selectors as CommentsSelectors } from './comments';
 // import categories from './categories';
 
 export default combineReducers({ decks })
 
 export const Selectors = {
+  decks: {
+    getSingleDeck: (state, id) => DecksSelectors.getSingleDeck(state.decks, id)
+  }
   //   posts: {
   //     getVisiblePosts: (state, category, sortBy, orderBy, searchTerm) =>
   //       PostsSelectors.getVisiblePosts(

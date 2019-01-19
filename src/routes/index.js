@@ -1,11 +1,12 @@
 import React from "react"
-import { View, Text } from "react-native"
 import { createStackNavigator, createAppContainer } from "react-navigation"
+import Ionicons from "@expo/vector-icons/Ionicons"
 
 import HomeScreen from "../screens/home"
 import DeckDetailScreen from "../screens/deckDetail"
 import AddDeckScreen from "../screens/addDeck"
 import AddCardScreen from "../screens/addCard"
+import QuizScreen from "../screens/quiz"
 
 const defaultNavigationOptions = {
   headerStyle: {
@@ -41,7 +42,10 @@ const MainNavigator = createStackNavigator(
 const RootNavigator = createStackNavigator(
   {
     Home: {
-      screen: MainNavigator
+      screen: MainNavigator,
+      navigationOptions: {
+        header: () => null
+      }
     },
     AddDeckModal: {
       screen: AddDeckScreen,
@@ -54,12 +58,18 @@ const RootNavigator = createStackNavigator(
       navigationOptions: {
         title: "Add Card"
       }
+    },
+    QuizModal: {
+      screen: QuizScreen,
+      navigationOptions: {
+        title: "Quiz"
+      }
     }
   },
   {
     defaultNavigationOptions,
-    mode: "modal",
-    headerMode: "none"
+    mode: "modal"
+    // headerMode: "none"
   }
 )
 

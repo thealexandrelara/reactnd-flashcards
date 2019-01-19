@@ -5,6 +5,10 @@ import { FloatingAction } from "react-native-floating-action"
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
+import { Creators as DecksActions } from "../../store/ducks/decks"
+
 import {
   Container,
   Header,
@@ -23,34 +27,38 @@ const actions = [
   }
 ]
 
-export default class Home extends React.Component {
+class Home extends React.Component {
   state = {
     animatedValue: new Animated.Value(0)
   }
 
-  navigateToDeckDetail = id => {
+  componentDidMount() {
+    const { retrieveDecksRequest } = this.props
+
+    retrieveDecksRequest()
+  }
+
+  navigateToDeckDetail = deckId => {
     const { navigation } = this.props
 
-    navigation.navigate("DeckDetail")
+    navigation.navigate("DeckDetail", { deckId })
   }
 
   openAddDeckPopup = name => {
     const { navigation } = this.props
-
-    console.log(name)
 
     navigation.navigate(name)
   }
 
   render() {
     const { animatedValue } = this.state
+    const { decks } = this.props
+
     let translateY = animatedValue.interpolate({
       inputRange: [0, 180],
       outputRange: [0, -180],
       extrapolate: "clamp"
     })
-
-    console.log(getStatusBarHeight())
 
     return (
       <Container>
@@ -67,6 +75,7 @@ export default class Home extends React.Component {
         <DecksList
           animatedValue={animatedValue}
           onListItemPressed={this.navigateToDeckDetail}
+          decks={decks}
         />
         <FloatingAction
           actions={actions}
@@ -77,3 +86,13 @@ export default class Home extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => ({ decks: Object.values(state.decks) })
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(DecksActions, dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home)

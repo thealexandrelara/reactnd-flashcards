@@ -1,6 +1,11 @@
 import React from "react"
 import { StatusBar } from "react-native"
 
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
+import { Creators as DecksActions } from "../../store/ducks/decks"
+import { Selectors } from "../../store/ducks"
+
 import {
   Container,
   HeaderContainer,
@@ -11,7 +16,7 @@ import {
 } from "./styles"
 import Button from "./components/Button"
 
-export default class DeckDetail extends React.Component {
+class DeckDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     // console.log(navigation)
 
@@ -20,26 +25,34 @@ export default class DeckDetail extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    console.log(prevProps)
-  }
-
   navigateTo = name => {
-    console.log(name)
     const { navigation } = this.props
+    const deckId = navigation.getParam("deckId", "")
 
-    navigation.navigate(name)
+    if (!!deckId) {
+      navigation.navigate(name, { deckId })
+    }
   }
 
   render() {
-    const { style } = this.props
+    const { style, deck } = this.props
+
+    if (!deck) {
+      return (
+        <Container>
+          <HeaderTitle>No deck</HeaderTitle>
+        </Container>
+      )
+    }
 
     return (
       <Container style={style}>
         <StatusBar barStyle="light-content" hidden={false} />
         <HeaderContainer>
-          <HeaderCardsCount>1 card</HeaderCardsCount>
-          <HeaderTitle>Redux</HeaderTitle>
+          <HeaderCardsCount>
+            {deck.cards.length} {deck.cards.length < 2 ? "card" : "cards"}
+          </HeaderCardsCount>
+          <HeaderTitle>{deck.title}</HeaderTitle>
         </HeaderContainer>
         <ButtonsWrapper>
           <ButtonsContainer>
@@ -47,6 +60,7 @@ export default class DeckDetail extends React.Component {
               name="Start a Quiz"
               iconName="cards"
               iconLibrary="MaterialCommunityIcons"
+              onPress={() => this.navigateTo("QuizModal")}
             />
           </ButtonsContainer>
           <ButtonsContainer>
@@ -58,10 +72,11 @@ export default class DeckDetail extends React.Component {
               onPress={() => this.navigateTo("AddCardModal")}
             />
             <Button
-              name="Edit cards"
-              iconName="circle-edit-outline"
-              iconLibrary="MaterialCommunityIcons"
+              name="Delete deck"
+              iconName="delete"
+              iconLibrary="MaterialIcons"
               style={{ marginLeft: 4 }}
+              type="danger"
             />
           </ButtonsContainer>
         </ButtonsWrapper>
@@ -69,3 +84,20 @@ export default class DeckDetail extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    deck: Selectors.decks.getSingleDeck(
+      state,
+      ownProps.navigation.getParam("deckId", "")
+    )
+  }
+}
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(DecksActions, dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DeckDetail)
