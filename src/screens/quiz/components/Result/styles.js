@@ -2,16 +2,16 @@ import { Dimensions } from "react-native"
 import { Button } from "react-native-elements"
 import styled from "styled-components/native"
 
-const itemHeight = Dimensions.get("window").height * 0.6
+// const itemHeight = Dimensions.get("window").height * 0.6
 const itemWidth = Dimensions.get("window").width * 0.9
 
 export const Card = styled.View`
+  /* justify-content: center; */
   align-items: center;
   padding: 16px;
   margin: 32px 0;
   background-color: white;
   border-radius: 3px;
-  height: ${itemHeight}px;
   width: ${itemWidth}px;
 
   elevation: 4;
@@ -22,7 +22,7 @@ export const Card = styled.View`
 `
 
 export const ResultsContainer = styled.View`
-  flex: 1;
+  /* flex: 1; */
   align-items: center;
 `
 

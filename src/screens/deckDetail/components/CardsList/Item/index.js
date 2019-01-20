@@ -1,22 +1,30 @@
 import React from "react"
 
-import { Container, Title, Text, Separator } from "./styles"
+import { Container, Title, Text, Separator, SubmitButton } from "./styles"
 
-export default class Item extends React.Component {
-  render() {
-    const {
-      card: { question, answer },
-      ...rest
-    } = this.props
+const Item = ({ card: { question, answer, id }, onDeleteCard, ...rest }) => (
+  <Container {...rest}>
+    <Title>Question:</Title>
+    <Text>{question}</Text>
+    <Separator />
+    <Title>Answer</Title>
+    <Text>{answer}</Text>
+    <SubmitButton
+      title="Delete"
+      borderRadius={3}
+      onPress={() => onDeleteCard(id)}
+      icon={{ name: "delete", color: "#ef5350" }}
+      containerViewStyle={{
+        borderWidth: 1,
+        borderColor: "#ef5350",
+        width: "50%",
+        marginTop: 16,
+        alignSelf: "center"
+      }}
+      textStyle={{ color: "#ef5350" }}
+      transparent
+    />
+  </Container>
+)
 
-    return (
-      <Container {...rest}>
-        <Title>Question:</Title>
-        <Text>{question}</Text>
-        <Separator />
-        <Title>Answer</Title>
-        <Text>{answer}</Text>
-      </Container>
-    )
-  }
-}
+export default Item

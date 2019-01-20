@@ -1,18 +1,17 @@
 import { State } from "react-native-gesture-handler"
 
 export const Types = {
+  ADD_INITIAL_DATA_REQUEST: "decks/ADD_INITIAL_DATA_REQUEST",
   RETRIEVE_DECKS_REQUEST: "decks/RETRIEVE_DECKS_REQUEST",
   RETRIEVE_DECKS_SUCCESS: "decks/RETRIEVE_DECKS_SUCCESS",
-  RETRIEVE_DECKS_ERROR: "decks/RETRIEVE_DECKS_ERROR",
   ADD_DECK_REQUEST: "decks/ADD_DECK_REQUEST",
   ADD_DECK_SUCCESS: "decks/ADD_DECK_SUCCESS",
-  ADD_DECK_ERROR: "decks/ADD_DECK_ERROR",
   ADD_CARD_REQUEST: "decks/ADD_CARD_REQUEST",
   ADD_CARD_SUCCESS: "decks/ADD_CARD_SUCCESS",
-  ADD_CARD_ERROR: "decks/ADD_CARD_ERROR",
+  DELETE_CARD_REQUEST: "decks/DELETE_CARD_REQUEST",
+  DELETE_CARD_SUCCESS: "decks/DELETE_CARD_SUCCESS",
   DELETE_DECK_REQUEST: "decks/DELETE_DECK_REQUEST",
-  DELETE_DECK_SUCCESS: "decks/DELETE_DECK_SUCCESS",
-  DELETE_DECK_ERROR: "decks/DELETE_DECK_ERROR"
+  DELETE_DECK_SUCCESS: "decks/DELETE_DECK_SUCCESS"
 }
 
 const INITIAL_STATE = {}
@@ -38,6 +37,17 @@ export default function decks(state = INITIAL_STATE, action) {
       const newState = { ...state }
       delete newState[action.payload.deckId]
       return newState
+    case Types.DELETE_CARD_SUCCESS:
+      const newDeletedCardState = {
+        ...state,
+        [action.payload.deckId]: {
+          ...state[action.payload.deckId],
+          cards: state[action.payload.deckId].cards.filter(
+            card => card.id !== action.payload.cardId
+          )
+        }
+      }
+      return newDeletedCardState
     default:
       return state
   }
@@ -48,6 +58,9 @@ export const Selectors = {
 }
 
 export const Creators = {
+  addInitialDataRequest: () => ({
+    type: Types.ADD_INITIAL_DATA_REQUEST
+  }),
   retrieveDecksRequest: () => ({
     type: Types.RETRIEVE_DECKS_REQUEST
   }),
@@ -78,5 +91,13 @@ export const Creators = {
   addCardSuccess: (data, deckId) => ({
     type: Types.ADD_CARD_SUCCESS,
     payload: { data, deckId }
+  }),
+  deleteCardRequest: (deckId, cardId) => ({
+    type: Types.DELETE_CARD_REQUEST,
+    payload: { deckId, cardId }
+  }),
+  deleteCardSuccess: (deckId, cardId) => ({
+    type: Types.DELETE_CARD_SUCCESS,
+    payload: { deckId, cardId }
   })
 }

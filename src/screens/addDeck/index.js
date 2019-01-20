@@ -1,5 +1,5 @@
 import React from "react"
-import { KeyboardAvoidingView, ScrollView, View } from "react-native"
+import { KeyboardAvoidingView, ScrollView, View, Platform } from "react-native"
 import Ionicons from "@expo/vector-icons/Ionicons"
 import uuid from "uuid"
 
@@ -18,7 +18,6 @@ class AddDeck extends React.Component {
       <Ionicons
         name={"ios-close"}
         onPress={() => {
-          // console.log(navigation)
           navigation.goBack()
         }}
         size={48}
@@ -41,10 +40,12 @@ class AddDeck extends React.Component {
     const id = uuid.v4().replace(/-/g, "")
     addDeckRequest({ id, title, timestamp: Date.now(), cards: [] }, id)
     navigation.goBack()
+    setTimeout(() => {
+      navigation.state.params.onAddDeck(id)
+    }, 300)
   }
 
   render() {
-    const inputStyle = { margin: 15 }
     const { ...rest } = this.props
     const { title } = this.state
 
@@ -53,7 +54,7 @@ class AddDeck extends React.Component {
         <ScrollView>
           <KeyboardAvoidingView
             behavior="position"
-            keyboardVerticalOffset={65}
+            keyboardVerticalOffset={Platform.select({ ios: 85, android: 100 })}
             enabled
             style={{ flex: 1 }}
           >

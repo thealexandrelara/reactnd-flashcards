@@ -1,7 +1,6 @@
 import React from "react"
 
 import { Container, StyledLottie } from "./styles"
-import DeckAnimation from "../../assets/animations/deck.json"
 
 export default class LottieController extends React.Component {
   state = {
@@ -19,7 +18,6 @@ export default class LottieController extends React.Component {
 
   _playAnimation = () => {
     if (!this.state.animation) {
-      console.log("state animation")
       this._loadAnimation()
     } else {
       this.animation.reset()

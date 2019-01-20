@@ -1,6 +1,10 @@
 import React from "react"
 import { Animated, TouchableOpacity, Text } from "react-native"
 
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
+import { Creators as DecksActions } from "../../../../store/ducks/decks"
+
 import {
   AnimatedFlatList,
   EmptyListContainer,
@@ -11,16 +15,14 @@ import {
 } from "./styles"
 import Item from "./Item"
 
-export default class CardsList extends React.Component {
-  keyExtractor = (item, index) => item.id
+const CardsList = props => {
+  const keyExtractor = (item, index) => item.id
 
-  renderItem = ({ item }) => {
-    console.log("ITEM", item)
-
-    return <Item card={item} />
+  const renderItem = ({ item }) => {
+    return <Item card={item} onDeleteCard={handleCardDelete} />
   }
 
-  renderEmptyComponent = () => {
+  const renderEmptyComponent = () => {
     return (
       <EmptyListContainer>
         <EmptyIcon name="cards-outline" size={64} />
@@ -29,8 +31,8 @@ export default class CardsList extends React.Component {
     )
   }
 
-  renderListHeaderComponent = () => {
-    const { cards } = this.props
+  const renderListHeaderComponent = () => {
+    const { cards } = props
     if (!cards.length) {
       return <></>
     }
@@ -41,33 +43,45 @@ export default class CardsList extends React.Component {
     )
   }
 
-  render() {
-    const { style, animatedValue, cards } = this.props
+  const handleCardDelete = cardId => {
+    const { deckId, deleteCardRequest } = props
 
-    return (
-      <AnimatedFlatList
-        contentContainerStyle={{
-          marginTop: 16,
-          paddingLeft: 16,
-          paddingRight: 16,
-          paddingBottom: 16
-        }}
-        scrollEventThrottle={16} // <-- Use 1 here to make sure no events are ever missed
-        onScroll={Animated.event(
-          [
-            {
-              nativeEvent: { contentOffset: { y: animatedValue } }
-            }
-          ],
-          { useNativeDriver: true } // <-- Add this
-        )}
-        style={style}
-        data={cards}
-        renderItem={this.renderItem}
-        keyExtractor={this.keyExtractor}
-        ListHeaderComponent={this.renderListHeaderComponent}
-        ListEmptyComponent={this.renderEmptyComponent}
-      />
-    )
+    deleteCardRequest(deckId, cardId)
   }
+
+  const { style, animatedValue, cards } = props
+
+  return (
+    <AnimatedFlatList
+      contentContainerStyle={{
+        marginTop: 16,
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingBottom: 16
+      }}
+      scrollEventThrottle={16} // <-- Use 1 here to make sure no events are ever missed
+      onScroll={Animated.event(
+        [
+          {
+            nativeEvent: { contentOffset: { y: animatedValue } }
+          }
+        ],
+        { useNativeDriver: true } // <-- Add this
+      )}
+      style={style}
+      data={cards}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+      ListHeaderComponent={renderListHeaderComponent}
+      ListEmptyComponent={renderEmptyComponent}
+    />
+  )
 }
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(DecksActions, dispatch)
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(CardsList)

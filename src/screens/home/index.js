@@ -9,6 +9,8 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import { Creators as DecksActions } from "../../store/ducks/decks"
 
+import { SCREEN_ROUTES_NAME } from "../../routes/constants"
+
 import {
   Container,
   Header,
@@ -21,7 +23,7 @@ import {
 const actions = [
   {
     text: "Add deck",
-    name: "AddDeckModal",
+    name: SCREEN_ROUTES_NAME.ADD_DECK_MODAL,
     icon: <MaterialIcons name="library-add" size={24} color="#fff" />,
     position: 1
   }
@@ -33,21 +35,22 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    const { retrieveDecksRequest } = this.props
+    const { addInitialDataRequest: addInitialDataAndRetrieveDecks } = this.props
 
-    retrieveDecksRequest()
+    addInitialDataAndRetrieveDecks()
+    // retrieveDecksRequest()
   }
 
   navigateToDeckDetail = deckId => {
     const { navigation } = this.props
 
-    navigation.navigate("DeckDetail", { deckId })
+    navigation.navigate(SCREEN_ROUTES_NAME.DECK_DETAIL, { deckId })
   }
 
   openAddDeckPopup = name => {
     const { navigation } = this.props
 
-    navigation.navigate(name)
+    navigation.navigate(name, { onAddDeck: this.navigateToDeckDetail })
   }
 
   render() {

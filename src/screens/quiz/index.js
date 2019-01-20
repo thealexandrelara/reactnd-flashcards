@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet } from "react-native"
+import { StyleSheet, ScrollView } from "react-native"
 import Ionicons from "@expo/vector-icons/Ionicons"
 import Swiper from "react-native-deck-swiper"
 
@@ -10,20 +10,17 @@ import { Creators as DecksActions } from "../../store/ducks/decks"
 import { Container, Title, Instructions } from "./styles"
 import Item from "./components/Item"
 import Result from "./components/Result"
+import {
+  setLocalNotification,
+  clearLocalNotification
+} from "../../utils/notifications"
 
 class Quiz extends React.Component {
   state = {
     isQuizFinished: false,
     cardIndex: 0,
     correctAnswers: 0,
-    questions: [
-      { id: 1, title: "ABC" },
-      { id: 2, title: "ZZZ" }
-      // { id: 3, title: "ZZZ" },
-      // { id: 4, title: "ZZZ" },
-      // { id: 5, title: "ZZZ" },
-      // { id: 6, title: "ZZZ" }
-    ]
+    questions: this.props.navigation.state.params.deck.cards
   }
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.getParam("title", "Quiz")}`,
@@ -31,7 +28,6 @@ class Quiz extends React.Component {
       <Ionicons
         name={"ios-close"}
         onPress={() => {
-          // console.log(navigation)
           navigation.goBack()
         }}
         size={48}
@@ -45,10 +41,20 @@ class Quiz extends React.Component {
     this.setTitleWithQuestionNumber()
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, prevState) {
     if (prevState.cardIndex !== this.state.cardIndex) {
       this.setTitleWithQuestionNumber()
     }
+
+    // If quiz was finished in the day, then delay the notification until the next day
+    if (this.state.isQuizFinished) {
+      this.delayNotificationUntilTomorrow()
+    }
+  }
+
+  delayNotificationUntilTomorrow = async () => {
+    await clearLocalNotification()
+    await setLocalNotification()
   }
 
   resetQuiz = () => {
@@ -97,14 +103,17 @@ class Quiz extends React.Component {
 
     if (isQuizFinished) {
       return (
-        <Container>
-          <Result
-            correctAnswers={correctAnswers}
-            totalQuestions={questions.length}
-            onResetQuiz={this.resetQuiz}
-            onGoBackToDeck={this.goBackToDeck}
-          />
-        </Container>
+        <ScrollView>
+          <Container style={{ justifyContent: "center" }}>
+            <Title>Your Results</Title>
+            <Result
+              correctAnswers={correctAnswers}
+              totalQuestions={questions.length}
+              onResetQuiz={this.resetQuiz}
+              onGoBackToDeck={this.goBackToDeck}
+            />
+          </Container>
+        </ScrollView>
       )
     }
 
@@ -118,7 +127,6 @@ class Quiz extends React.Component {
           keyExtractor={this._keyExtractor}
           renderCard={this._renderItem}
           onSwiped={cardIndex => {
-            console.log(cardIndex)
             if (cardIndex + 1 < questions.length) {
               this.setState(prevState => ({
                 cardIndex: prevState.cardIndex + 1

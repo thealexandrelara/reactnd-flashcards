@@ -10,7 +10,6 @@ import {
   SubmitButton
 } from "./styles"
 import LottieController from "../../../../components/LottieController"
-import TrophyAnimation from "../../../../assets/animations/trophy.json"
 import DeadpoolAnimation from "../../../../assets/animations/deadpool.json"
 import DuckBlackPowerAnimation from "../../../../assets/animations/duck_black_power.json"
 import DinoDanceAnimation from "../../../../assets/animations/dino_dance.json"
@@ -18,10 +17,7 @@ import DinoDanceAnimation from "../../../../assets/animations/dino_dance.json"
 const itemWidth = Dimensions.get("window").width * 0.8
 
 export default class Result extends React.Component {
-  componentDidMount() {}
-
   handleClickCard = () => {
-    console.log("text")
     this.card.flip()
   }
 
@@ -34,7 +30,8 @@ export default class Result extends React.Component {
         animation: DeadpoolAnimation,
         text: "Oh no! You can do better than that!",
         width: itemWidth,
-        height: 150
+        height: 150,
+        marginTop: -50
       }
     } else if (percentage >= 40 && percentage < 80) {
       return {

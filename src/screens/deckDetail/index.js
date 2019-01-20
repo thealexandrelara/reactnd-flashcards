@@ -6,6 +6,8 @@ import { bindActionCreators } from "redux"
 import { Creators as DecksActions } from "../../store/ducks/decks"
 import { Selectors } from "../../store/ducks"
 
+import { SCREEN_ROUTES_NAME } from "../../routes/constants"
+
 import {
   Container,
   HeaderContainer,
@@ -19,8 +21,6 @@ import CardsList from "./components/CardsList"
 
 class DeckDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    // console.log(navigation)
-
     return {
       headerTitle: ""
     }
@@ -34,11 +34,11 @@ class DeckDetail extends React.Component {
   }
 
   navigateTo = name => {
-    const { navigation } = this.props
+    const { navigation, deck } = this.props
     const deckId = navigation.getParam("deckId", "")
 
     if (!!deckId) {
-      navigation.navigate(name, { deckId })
+      navigation.navigate(name, { deckId, deck })
     }
   }
 
@@ -68,7 +68,8 @@ class DeckDetail extends React.Component {
               name="Start a Quiz"
               iconName="cards"
               iconLibrary="MaterialCommunityIcons"
-              onPress={() => this.navigateTo("QuizModal")}
+              onPress={() => this.navigateTo(SCREEN_ROUTES_NAME.QUIZ_MODAL)}
+              type={!deck.cards.length ? "disabled" : undefined}
             />
           </ButtonsContainer>
           <ButtonsContainer>
@@ -77,7 +78,7 @@ class DeckDetail extends React.Component {
               iconName="library-add"
               iconLibrary="MaterialIcons"
               style={{ marginRight: 4 }}
-              onPress={() => this.navigateTo("AddCardModal")}
+              onPress={() => this.navigateTo(SCREEN_ROUTES_NAME.ADD_CARD_MODAL)}
             />
             <Button
               name="Delete deck"
@@ -89,7 +90,7 @@ class DeckDetail extends React.Component {
             />
           </ButtonsContainer>
         </ButtonsWrapper>
-        <CardsList cards={deck.cards} />
+        <CardsList cards={deck.cards} deckId={deck.id} />
       </Container>
     )
   }

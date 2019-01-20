@@ -1,5 +1,6 @@
 import React from "react"
-import { TouchableWithoutFeedback, View, Text, StyleSheet } from "react-native"
+import { TouchableWithoutFeedback } from "react-native"
+import _ from "lodash"
 
 import {
   Container,
@@ -15,46 +16,50 @@ import LottieController from "../../../../components/LottieController"
 import CorrectAnimation from "../../../../assets/animations/correct.json"
 import IncorrectAnimation from "../../../../assets/animations/incorrect.json"
 
-import { Animated } from "react-native"
-
 export default class Item extends React.Component {
-  componentDidMount() {
-    console.log("MOUNTED")
-  }
+  _answered = false
 
   handleClickCard = () => {
-    console.log("text")
     this.card.flip()
   }
 
-  handleClickIncorrect = () => {
+  handleClickIncorrect = _.debounce(() => {
     const { question, onAnswer } = this.props
-    this.incorrectButton._playAnimation()
-    onAnswer("incorrect", question.id)
-  }
+    if (!this._answered) {
+      this.incorrectButton._playAnimation()
+      onAnswer("incorrect", question.id)
+      this._answered = true
+    }
+  }, 100)
 
-  handleClickCorrect = () => {
+  handleClickCorrect = _.debounce(() => {
     const { question, onAnswer } = this.props
-    this.correctButton._playAnimation()
-    onAnswer("correct", question.id)
-  }
+    if (!this._answered) {
+      this.correctButton._playAnimation()
+      onAnswer("correct", question.id)
+      this._answered = true
+    }
+  }, 100)
 
   saveRef = card => (this.card = card)
 
   render() {
-    const { question, ...rest } = this.props
+    const {
+      question: { question, answer },
+      ...rest
+    } = this.props
 
     return (
       <CardFlip {...rest} ref={this.saveRef}>
         <TouchableWithoutFeedback onPress={this.handleClickCard}>
           <Card>
-            <AnswerText>What is React?</AnswerText>
+            <AnswerText>{question}</AnswerText>
           </Card>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={this.handleClickCard}>
           <Card>
             <AnswerContainer>
-              <AnswerText>A library for managing user interfaces</AnswerText>
+              <AnswerText>{answer}</AnswerText>
             </AnswerContainer>
             <AnswerButtonsContainer>
               <AnswerDescriptionText>Your answer was</AnswerDescriptionText>

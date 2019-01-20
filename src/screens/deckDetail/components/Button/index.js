@@ -2,10 +2,8 @@ import React from "react"
 
 import { Container, Title, MaterialCommunityIcon, MaterialIcon } from "./styles"
 
-export default class Button extends React.Component {
-  renderIcon = () => {
-    const { iconName, iconLibrary, type } = this.props
-
+const Button = ({ name, id, type, iconName, iconLibrary, ...rest }) => {
+  const renderIcon = () => {
     if (iconLibrary === "MaterialIcons") {
       return <MaterialIcon name={iconName} size={48} type={type} />
     } else if (iconLibrary === "MaterialCommunityIcons") {
@@ -15,15 +13,12 @@ export default class Button extends React.Component {
     }
   }
 
-  render() {
-    const { name, id, type, ...rest } = this.props
-
-    return (
-      <Container {...rest} type={type}>
-        {this.renderIcon()}
-        {/* <MaterialCommunityIcon name="cards" size={48} /> */}
-        <Title type={type}>{name}</Title>
-      </Container>
-    )
-  }
+  return (
+    <Container {...rest} type={type} disabled={type === "disabled"}>
+      {renderIcon()}
+      <Title type={type}>{name}</Title>
+    </Container>
+  )
 }
+
+export default Button

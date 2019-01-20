@@ -1,4 +1,5 @@
 import styled from "styled-components/native"
+import { Button } from "react-native-elements"
 
 export const Container = styled.View`
   justify-content: center;
@@ -8,8 +9,6 @@ export const Container = styled.View`
   border-radius: 3px;
   min-height: 60px;
 
-  /* box-shadow: 1px 11px 35px black; */
-  /* box-shadow: 1px 11px 35px 5px; */
   elevation: 4;
   shadow-color: grey;
   shadow-offset: 5px 5px;
@@ -30,3 +29,5 @@ export const Separator = styled.View`
   height: 1px;
   background-color: #e0e0e0;
 `
+
+export const SubmitButton = styled(Button)``

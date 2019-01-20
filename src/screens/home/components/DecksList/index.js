@@ -9,15 +9,17 @@ import {
 } from "./styles"
 import Item from "./Item"
 
-export default class DecksList extends React.Component {
+const DecksList = props => {
   keyExtractor = (item, index) => item.id
 
   renderItem = ({ item }) => {
-    console.log(item)
     const cardsCount = item.cards.length || 0
 
     return (
-      <TouchableOpacity onPress={() => this.props.onListItemPressed(item.id)}>
+      <TouchableOpacity
+        onPress={() => props.onListItemPressed(item.id)}
+        activeOpacity={1}
+      >
         <Item name={item.title} id={item.id} cardsCount={cardsCount} />
       </TouchableOpacity>
     )
@@ -32,32 +34,32 @@ export default class DecksList extends React.Component {
     )
   }
 
-  render() {
-    const { style, animatedValue, decks } = this.props
+  const { style, animatedValue, decks } = props
 
-    return (
-      <AnimatedFlatList
-        contentContainerStyle={{
-          marginTop: 160,
-          paddingLeft: 16,
-          paddingRight: 16,
-          paddingBottom: 176 + decks.length * 8 + (decks.length / 10) * 16
-        }}
-        scrollEventThrottle={16} // <-- Use 1 here to make sure no events are ever missed
-        onScroll={Animated.event(
-          [
-            {
-              nativeEvent: { contentOffset: { y: animatedValue } }
-            }
-          ],
-          { useNativeDriver: true } // <-- Add this
-        )}
-        style={style}
-        data={decks}
-        renderItem={this.renderItem}
-        keyExtractor={this.keyExtractor}
-        ListEmptyComponent={this.renderEmptyComponent}
-      />
-    )
-  }
+  return (
+    <AnimatedFlatList
+      contentContainerStyle={{
+        marginTop: 160,
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingBottom: 176 + decks.length * 8 + (decks.length / 10) * 16
+      }}
+      scrollEventThrottle={16} // <-- Use 1 here to make sure no events are ever missed
+      onScroll={Animated.event(
+        [
+          {
+            nativeEvent: { contentOffset: { y: animatedValue } }
+          }
+        ],
+        { useNativeDriver: true } // <-- Add this
+      )}
+      style={style}
+      data={decks}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+      ListEmptyComponent={renderEmptyComponent}
+    />
+  )
 }
+
+export default DecksList

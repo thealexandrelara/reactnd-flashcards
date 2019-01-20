@@ -12,8 +12,16 @@ export const Container = styled.TouchableOpacity`
   border-radius: 3px;
   min-height: 80px;
   border-bottom-width: 4px;
-  border-bottom-color: ${props =>
-    props.type === "danger" ? `#ef5350` : `#4257b2`};
+  border-bottom-color: ${props => {
+    switch (props.type) {
+      case "danger":
+        return `#ef5350`
+      case "disabled":
+        return `#E0E0E0`
+      default:
+        return `#4257b2`
+    }
+  }};
 
   /* box-shadow: 1px 11px 35px black; */
   /* box-shadow: 1px 11px 35px 5px; */
@@ -27,13 +35,40 @@ export const Title = styled.Text`
   margin-top: 8px;
   text-align: center;
   font-weight: bold;
-  color: ${props => (props.type === "danger" ? `#ef5350` : `#4257b2`)};
+  color: ${props => {
+    switch (props.type) {
+      case "danger":
+        return `#ef5350`
+      case "disabled":
+        return `#E0E0E0`
+      default:
+        return `#4257b2`
+    }
+  }};
 `
 
 export const MaterialCommunityIcon = styled(MaterialCommunityIcons)`
-  color: ${props => (props.type === "danger" ? `#ef5350` : `#4257b2`)};
+  color: ${props => {
+    switch (props.type) {
+      case "danger":
+        return `#ef5350`
+      case "disabled":
+        return `#E0E0E0`
+      default:
+        return `#4257b2`
+    }
+  }};
 `
 
 export const MaterialIcon = styled(MaterialIcons)`
-  color: ${props => (props.type === "danger" ? `#ef5350` : `#4257b2`)};
+  color: ${props => {
+    switch (props.type) {
+      case "danger":
+        return `#ef5350`
+      case "disabled":
+        return `#E0E0E0`
+      default:
+        return `#4257b2`
+    }
+  }};
 `

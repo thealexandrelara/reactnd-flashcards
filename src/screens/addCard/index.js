@@ -1,5 +1,5 @@
 import React from "react"
-import { KeyboardAvoidingView, ScrollView, View } from "react-native"
+import { KeyboardAvoidingView, ScrollView, View, Platform } from "react-native"
 import { FormLabel, FormInput } from "react-native-elements"
 import Ionicons from "@expo/vector-icons/Ionicons"
 import uuid from "uuid"
@@ -18,13 +18,13 @@ class AddCard extends React.Component {
     question: "",
     answer: ""
   }
+
   static navigationOptions = ({ navigation }) => ({
     title: "Add deck",
     headerLeft: () => (
       <Ionicons
         name={"ios-close"}
         onPress={() => {
-          // console.log(navigation)
           navigation.goBack()
         }}
         size={48}
@@ -58,7 +58,7 @@ class AddCard extends React.Component {
         <ScrollView>
           <KeyboardAvoidingView
             behavior="position"
-            keyboardVerticalOffset={65}
+            keyboardVerticalOffset={Platform.select({ ios: 85, android: 100 })}
             enabled
             style={{ flex: 1 }}
           >
