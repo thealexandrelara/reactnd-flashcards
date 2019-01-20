@@ -18,7 +18,9 @@ import IncorrectAnimation from "../../../../assets/animations/incorrect.json"
 import { Animated } from "react-native"
 
 export default class Item extends React.Component {
-  componentDidMount() {}
+  componentDidMount() {
+    console.log("MOUNTED")
+  }
 
   handleClickCard = () => {
     console.log("text")
@@ -43,7 +45,7 @@ export default class Item extends React.Component {
     const { question, ...rest } = this.props
 
     return (
-      <CardFlip {...rest} ref={this.saveRef} pointerEvents="none">
+      <CardFlip {...rest} ref={this.saveRef}>
         <TouchableWithoutFeedback onPress={this.handleClickCard}>
           <Card>
             <AnswerText>What is React?</AnswerText>

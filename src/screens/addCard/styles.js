@@ -2,7 +2,7 @@ import styled from "styled-components/native"
 import { Button } from "react-native-elements"
 
 export const Container = styled.SafeAreaView`
-  flex: 1;
+  /* justify-content: flex-end; */
 `
 
 export const SubmitButton = styled(Button)`

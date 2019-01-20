@@ -13,17 +13,24 @@ export const AnimatedFlatList = styled(UnstyledAnimatedFlatList)``
 
 export const EmptyListContainer = styled.View`
   flex: 1;
-  min-height: ${screenHeight - 200};
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 `
 
 export const EmptyListText = styled.Text`
-  text-align: center;
   font-size: 16px;
   color: #9e9e9e;
 `
 
 export const EmptyIcon = styled(MaterialCommunityIcons)`
   color: #9e9e9e;
+`
+
+export const HeaderContainer = styled.View``
+
+export const HeaderText = styled.Text`
+  font-weight: bold;
+  font-size: 24px;
+  color: #9e9e9e;
+  margin-bottom: 16px;
 `

@@ -1,5 +1,4 @@
 import React from "react"
-import { TouchableOpacity } from "react-native"
 
 import { Container, Title, MaterialCommunityIcon, MaterialIcon } from "./styles"
 

@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-redux
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add native-base
 
 PATH: 
   C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\libnvvp;C:\Program Files\Java\jdk1.8.0_77\bin;C:\Perl64\site\bin;C:\Perl64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Users\Alexandre Lara\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Common Files\Autodesk Shared\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\Common Files\Seagate\SnapAPI\;C:\Program Files\MongoDB\Server\3.2\bin;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Skype\Phone\;C:\Go\bin;C:\Program Files\Git\cmd;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Users\Alexandre Lara\AppData\Local\Programs\Python\Python36\Scripts\;C:\Users\Alexandre Lara\AppData\Local\Programs\Python\Python36\;C:\Program Files\Java\jdk1.8.0_77\bin;C:\Users\Alexandre Lara\AppData\Local\Programs\Python\Python35-32\Scripts\;C:\Users\Alexandre Lara\AppData\Local\Programs\Python\Python35-32\;C:\Program Files (x86)\Mozilla Firefox;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\Alexandre Lara\AppData\Local\Programs\Git\cmd;C:\Program Files\MySQL\mysql-5.7.13-winx64\bin;C:\Program Files\PostgreSQL\9.5\bin;C:\Users\Alexandre Lara\AppData\Local\.meteor\;C:\Users\Alexandre Lara\AppData\Local\Microsoft\WindowsApps;C:\Users\Alexandre Lara\AppData\Local\atom\bin;C:\SpotBugsCanDelete\pmd-bin-5.8.1\bin;C:\lxd;;C:\Users\Alexandre Lara\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Alexandre Lara\AppData\Roaming\npm;C:\Users\Alexandre Lara\AppData\Local\Yarn\bin
@@ -29,13 +29,18 @@ npm manifest:
       "expo": "^32.0.0",
       "react": "16.5.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+      "react-native-card-flip": "^1.0.4",
+      "react-native-deck-swiper": "^1.5.26",
       "react-native-elements": "^0.19.1",
       "react-native-floating-action": "^1.13.0",
+      "react-native-snap-carousel": "^3.7.5",
       "react-native-status-bar-height": "^2.2.0",
       "react-navigation": "^3.0.9",
+      "react-redux": "^6.0.0",
       "redux": "^4.0.1",
       "redux-saga": "^0.16.2",
-      "styled-components": "^4.1.3"
+      "styled-components": "^4.1.3",
+      "uuid": "^3.3.2"
     },
     "devDependencies": {
       "babel-preset-expo": "^5.0.0"
@@ -636,7 +641,7 @@ Lockfile:
       pirates "^4.0.0"
       source-map-support "^0.5.9"
   
-  "@babel/runtime@^7.1.2":
+  "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0":
     version "7.2.0"
     resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.2.0.tgz#b03e42eeddf5898e00646e4c840fa07ba8dcad7f"
     integrity sha512-oouEibCbHMVdZSDlJBO6bZmID/zA/G/Qx3H1d3rSNPTD+L8UNKvCat7aKWSJ74zYbm5zWGh0GQN0hKj8zYFTCg==
@@ -2946,7 +2951,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
     integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
   
-  hoist-non-react-statics@^3.0.1:
+  hoist-non-react-statics@^3.0.1, hoist-non-react-statics@^3.2.1:
     version "3.2.1"
     resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.2.1.tgz#c09c0555c84b38a7ede6912b61efddafd6e75e1e"
     integrity sha512-TFsu3TV3YLY+zFTZDrN8L2DTFanObwmBLpWvJs1qfUuEQ5bTAdFcwfx2T/bsCXfM9QHSLvjfP+nihEl0yvozxw==
@@ -4581,6 +4586,14 @@ Lockfile:
     dependencies:
       asap "~2.0.3"
   
+  prop-types@15.5.10:
+    version "15.5.10"
+    resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
+    integrity sha1-J5ffwxJhguOpXj37suiT3ddFYVQ=
+    dependencies:
+      fbjs "^0.8.9"
+      loose-envify "^1.3.1"
+  
   prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
     version "15.6.2"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
@@ -4636,6 +4649,14 @@ Lockfile:
       minimist "^1.2.0"
       strip-json-comments "~2.0.1"
   
+  react-addons-shallow-compare@15.6.2:
+    version "15.6.2"
+    resolved "https://registry.yarnpkg.com/react-addons-shallow-compare/-/react-addons-shallow-compare-15.6.2.tgz#198a00b91fc37623db64a28fd17b596ba362702f"
+    integrity sha1-GYoAuR/DdiPbZKKP0XtZa6NicC8=
+    dependencies:
+      fbjs "^0.8.4"
+      object-assign "^4.1.0"
+  
   react-clone-referenced-element@^1.0.1:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/react-clone-referenced-element/-/react-clone-referenced-element-1.1.0.tgz#9cdda7f2aeb54fea791f3ab8c6ab96c7a77d0158"
@@ -4654,7 +4675,7 @@ Lockfile:
       shell-quote "^1.6.1"
       ws "^3.3.1"
   
-  react-is@^16.3.2, react-is@^16.5.2, react-is@^16.6.0:
+  react-is@^16.3.2, react-is@^16.5.2, react-is@^16.6.0, react-is@^16.6.3:
     version "16.7.0"
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.7.0.tgz#c1bd21c64f1f1364c6f70695ec02d69392f41bfa"
     integrity sha512-Z0VRQdF4NPDoI0tsXVMLkJLiwEBa+RP66g0xDHxgxysxSoCUccSten4RTF/UFvZF1dZvZ9Zu1sx+MDXwcOR34g==
@@ -4668,6 +4689,20 @@ Lockfile:
     version "2.2.5"
     resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.2.5.tgz#4074dd63b4973e6397d9ce50e97b57c77a518e9d"
     integrity sha1-QHTdY7SXPmOX2c5Q6XtXx3pRjp0=
+  
+  react-native-card-flip@^1.0.4:
+    version "1.0.4"
+    resolved "https://registry.yarnpkg.com/react-native-card-flip/-/react-native-card-flip-1.0.4.tgz#cf01fccbb98697842de7134a4f7b51ee69da430a"
+    integrity sha512-CbCLrcGxEkHP87Aid7YBZXQiiXin/dH8ve4UI4Xin7/fpmoWaSv2bRsCgcCvRsfYXvkyx1pgdBOBlGqLJy52cA==
+    dependencies:
+      prop-types "15.5.10"
+  
+  react-native-deck-swiper@^1.5.26:
+    version "1.5.26"
+    resolved "https://registry.yarnpkg.com/react-native-deck-swiper/-/react-native-deck-swiper-1.5.26.tgz#c55c443b4ebe92eceaa67fe2f7d0288df4966cd0"
+    integrity sha512-6sB1T0EDlrZ4SSxL2qUOltq5ufhBXQ9I0ZvflmkO6k+zDOtGJ0BoFnVSfdjIuXnfVpdZVdSHQmpKtDmtIxPzmQ==
+    dependencies:
+      prop-types "15.5.10"
   
   react-native-elements@^0.19.1:
     version "0.19.1"
@@ -4725,6 +4760,14 @@ Lockfile:
     version "1.0.0-alpha.21"
     resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.21.tgz#ba8d401e82fa3d0f30e7922dbb6446a8c000d7ef"
     integrity sha512-Jm0hfUyEw0v4Rn2rmpG2ab+H2J+36a/505gufMeZQUcx8EajysiuyzNcHQ9B9NhUEUajk/ostF73X4pHuMLItw==
+  
+  react-native-snap-carousel@^3.7.5:
+    version "3.7.5"
+    resolved "https://registry.yarnpkg.com/react-native-snap-carousel/-/react-native-snap-carousel-3.7.5.tgz#7172456d40ab9161523055eb302f9b03b244240a"
+    integrity sha512-t0/wkjA4Doehv3QTcmzO56G7paGtYsvJgw9XrFI7GCDLK7MrHTiN22ROuJOxMy61nPetyjDAS0Qa3XMl8K7rVQ==
+    dependencies:
+      prop-types "^15.6.1"
+      react-addons-shallow-compare "15.6.2"
   
   react-native-status-bar-height@^2.2.0:
     version "2.2.0"
@@ -4857,6 +4900,18 @@ Lockfile:
     dependencies:
       lodash "^4.6.1"
       react-deep-force-update "^1.0.0"
+  
+  react-redux@^6.0.0:
+    version "6.0.0"
+    resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-6.0.0.tgz#09e86eeed5febb98e9442458ad2970c8f1a173ef"
+    integrity sha512-EmbC3uLl60pw2VqSSkj6HpZ6jTk12RMrwXMBdYtM6niq0MdEaRq9KYCwpJflkOZj349BLGQm1MI/JO1W96kLWQ==
+    dependencies:
+      "@babel/runtime" "^7.2.0"
+      hoist-non-react-statics "^3.2.1"
+      invariant "^2.2.4"
+      loose-envify "^1.4.0"
+      prop-types "^15.6.2"
+      react-is "^16.6.3"
   
   react-timer-mixin@^0.13.2:
     version "0.13.4"

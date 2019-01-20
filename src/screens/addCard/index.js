@@ -1,9 +1,6 @@
 import React from "react"
-import {
-  FormLabel,
-  FormInput,
-  FormValidationMessage
-} from "react-native-elements"
+import { KeyboardAvoidingView, ScrollView, View } from "react-native"
+import { FormLabel, FormInput } from "react-native-elements"
 import Ionicons from "@expo/vector-icons/Ionicons"
 import uuid from "uuid"
 
@@ -14,7 +11,7 @@ import { Creators as DecksActions } from "../../store/ducks/decks"
 import LottieController from "../../components/LottieController"
 import DeckAnimation from "../../assets/animations/deck.json"
 
-import { Container, SubmitButton } from "./styles"
+import { Container, SubmitButton, FormContainer } from "./styles"
 
 class AddCard extends React.Component {
   state = {
@@ -54,26 +51,44 @@ class AddCard extends React.Component {
 
   render() {
     const { ...rest } = this.props
+    const { question, answer } = this.state
 
     return (
       <Container {...rest}>
-        <LottieController
-          animation={DeckAnimation}
-          loop={true}
-          flipHorizontal={true}
-        />
-        <FormLabel>Question</FormLabel>
-        <FormInput onChangeText={this.onChangeQuestionText} />
-        {/* <FormValidationMessage>Error message</FormValidationMessage> */}
-        <FormLabel>Answer</FormLabel>
-        <FormInput onChangeText={this.onChangeAnswerText} />
-        {/* <FormValidationMessage>Error message</FormValidationMessage> */}
-        <SubmitButton
-          title="SUBMIT"
-          backgroundColor="#4257b2"
-          borderRadius={3}
-          onPress={this.handleSubmit}
-        />
+        <ScrollView>
+          <KeyboardAvoidingView
+            behavior="position"
+            keyboardVerticalOffset={65}
+            enabled
+            style={{ flex: 1 }}
+          >
+            <LottieController
+              animation={DeckAnimation}
+              loop={true}
+              flipHorizontal={true}
+            />
+            <FormLabel>Question</FormLabel>
+            <FormInput
+              onChangeText={this.onChangeQuestionText}
+              underlineColorAndroid="#e0e0e0"
+            />
+            {/* <FormValidationMessage>Error message</FormValidationMessage> */}
+            <FormLabel>Answer</FormLabel>
+            <FormInput
+              onChangeText={this.onChangeAnswerText}
+              underlineColorAndroid="#e0e0e0"
+            />
+            {/* <FormValidationMessage>Error message</FormValidationMessage> */}
+            <SubmitButton
+              title="SUBMIT"
+              backgroundColor="#4257b2"
+              borderRadius={3}
+              onPress={this.handleSubmit}
+              disabled={!question || !answer}
+            />
+            <View style={{ flex: 1 }} />
+          </KeyboardAvoidingView>
+        </ScrollView>
       </Container>
     )
   }

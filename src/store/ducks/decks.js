@@ -9,7 +9,10 @@ export const Types = {
   ADD_DECK_ERROR: "decks/ADD_DECK_ERROR",
   ADD_CARD_REQUEST: "decks/ADD_CARD_REQUEST",
   ADD_CARD_SUCCESS: "decks/ADD_CARD_SUCCESS",
-  ADD_CARD_ERROR: "decks/ADD_CARD_ERROR"
+  ADD_CARD_ERROR: "decks/ADD_CARD_ERROR",
+  DELETE_DECK_REQUEST: "decks/DELETE_DECK_REQUEST",
+  DELETE_DECK_SUCCESS: "decks/DELETE_DECK_SUCCESS",
+  DELETE_DECK_ERROR: "decks/DELETE_DECK_ERROR"
 }
 
 const INITIAL_STATE = {}
@@ -31,6 +34,10 @@ export default function decks(state = INITIAL_STATE, action) {
           cards: [action.payload.data, ...state[action.payload.deckId].cards]
         }
       }
+    case Types.DELETE_DECK_SUCCESS:
+      const newState = { ...state }
+      delete newState[action.payload.deckId]
+      return newState
     default:
       return state
   }
@@ -55,6 +62,14 @@ export const Creators = {
   addDeckSuccess: (data, deckId) => ({
     type: Types.ADD_DECK_SUCCESS,
     payload: { data, deckId }
+  }),
+  deleteDeckRequest: deckId => ({
+    type: Types.DELETE_DECK_REQUEST,
+    payload: { deckId }
+  }),
+  deleteDeckSuccess: deckId => ({
+    type: Types.DELETE_DECK_SUCCESS,
+    payload: { deckId }
   }),
   addCardRequest: (card, deckId) => ({
     type: Types.ADD_CARD_REQUEST,

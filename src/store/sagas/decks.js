@@ -76,3 +76,33 @@ export function* addCard(action) {
     // )
   }
 }
+
+export function* deleteDeck(action) {
+  const { deckId } = action.payload
+
+  try {
+    // Retrieve data and parse them to an object
+    const data = yield call([AsyncStorage, "getItem"], key)
+    const decks = JSON.parse(data) || {}
+
+    const newDecks = { ...decks }
+    delete newDecks[deckId]
+
+    // Add card
+    yield call(
+      [AsyncStorage, "setItem"],
+      key,
+      JSON.stringify({
+        ...newDecks
+      })
+    )
+
+    yield put(DecksActions.deleteDeckSuccess(deckId))
+  } catch (err) {
+    console.log("error ", err)
+    yield put()
+    // DecksActions.addCardError(
+    //   "An error has occurred. Please, refresh the page."
+    // )
+  }
+}

@@ -2,46 +2,55 @@ import React from "react"
 import { Animated, TouchableOpacity, Text } from "react-native"
 
 import {
-  EmptyListContainer,
   AnimatedFlatList,
+  EmptyListContainer,
   EmptyListText,
-  EmptyIcon
+  EmptyIcon,
+  HeaderContainer,
+  HeaderText
 } from "./styles"
 import Item from "./Item"
 
-export default class DecksList extends React.Component {
+export default class CardsList extends React.Component {
   keyExtractor = (item, index) => item.id
 
   renderItem = ({ item }) => {
-    console.log(item)
-    const cardsCount = item.cards.length || 0
+    console.log("ITEM", item)
 
-    return (
-      <TouchableOpacity onPress={() => this.props.onListItemPressed(item.id)}>
-        <Item name={item.title} id={item.id} cardsCount={cardsCount} />
-      </TouchableOpacity>
-    )
+    return <Item card={item} />
   }
 
   renderEmptyComponent = () => {
     return (
       <EmptyListContainer>
         <EmptyIcon name="cards-outline" size={64} />
-        <EmptyListText>No deck found</EmptyListText>
+        <EmptyListText>No card found</EmptyListText>
       </EmptyListContainer>
     )
   }
 
+  renderListHeaderComponent = () => {
+    const { cards } = this.props
+    if (!cards.length) {
+      return <></>
+    }
+    return (
+      <HeaderContainer>
+        <HeaderText>Cards</HeaderText>
+      </HeaderContainer>
+    )
+  }
+
   render() {
-    const { style, animatedValue, decks } = this.props
+    const { style, animatedValue, cards } = this.props
 
     return (
       <AnimatedFlatList
         contentContainerStyle={{
-          marginTop: 160,
+          marginTop: 16,
           paddingLeft: 16,
           paddingRight: 16,
-          paddingBottom: 176 + decks.length * 8 + (decks.length / 10) * 16
+          paddingBottom: 16
         }}
         scrollEventThrottle={16} // <-- Use 1 here to make sure no events are ever missed
         onScroll={Animated.event(
@@ -53,9 +62,10 @@ export default class DecksList extends React.Component {
           { useNativeDriver: true } // <-- Add this
         )}
         style={style}
-        data={decks}
+        data={cards}
         renderItem={this.renderItem}
         keyExtractor={this.keyExtractor}
+        ListHeaderComponent={this.renderListHeaderComponent}
         ListEmptyComponent={this.renderEmptyComponent}
       />
     )

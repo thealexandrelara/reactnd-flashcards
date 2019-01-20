@@ -1,4 +1,5 @@
 import React from "react"
+import { KeyboardAvoidingView, ScrollView, View } from "react-native"
 import Ionicons from "@expo/vector-icons/Ionicons"
 import uuid from "uuid"
 
@@ -49,20 +50,34 @@ class AddDeck extends React.Component {
 
     return (
       <Container {...rest}>
-        <LottieController
-          animation={DeckAnimation}
-          loop={true}
-          flipHorizontal
-        />
-        <FormLabel>Title</FormLabel>
-        <FormInput onChangeText={this.onChangeText} />
-        {/* <FormValidationMessage>Error message</FormValidationMessage> */}
-        <SubmitButton
-          title="CREATE DECK"
-          backgroundColor="#4257b2"
-          borderRadius={3}
-          onPress={this.handleSubmit}
-        />
+        <ScrollView>
+          <KeyboardAvoidingView
+            behavior="position"
+            keyboardVerticalOffset={65}
+            enabled
+            style={{ flex: 1 }}
+          >
+            <LottieController
+              animation={DeckAnimation}
+              loop={true}
+              flipHorizontal
+            />
+            <FormLabel>Title</FormLabel>
+            <FormInput
+              onChangeText={this.onChangeText}
+              underlineColorAndroid="#e0e0e0"
+            />
+            {/* <FormValidationMessage>Error message</FormValidationMessage> */}
+            <SubmitButton
+              title="CREATE DECK"
+              backgroundColor="#4257b2"
+              borderRadius={3}
+              onPress={this.handleSubmit}
+              disabled={!title}
+            />
+            <View style={{ flex: 1 }} />
+          </KeyboardAvoidingView>
+        </ScrollView>
       </Container>
     )
   }

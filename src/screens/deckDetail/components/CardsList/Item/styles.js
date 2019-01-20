@@ -8,6 +8,8 @@ export const Container = styled.View`
   border-radius: 3px;
   min-height: 60px;
 
+  /* box-shadow: 1px 11px 35px black; */
+  /* box-shadow: 1px 11px 35px 5px; */
   elevation: 4;
   shadow-color: grey;
   shadow-offset: 5px 5px;
@@ -19,7 +21,12 @@ export const Title = styled.Text`
   font-weight: bold;
   color: #4257b2;
 `
-export const CardsCount = styled.Text`
-  margin-top: 6px;
+export const Text = styled.Text`
   color: #9e9e9e;
+`
+
+export const Separator = styled.View`
+  margin: 16px 0px;
+  height: 1px;
+  background-color: #e0e0e0;
 `

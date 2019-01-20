@@ -6,7 +6,9 @@ import {
   FormValidationMessage
 } from "react-native-elements"
 
-export const Container = styled.SafeAreaView``
+export const Container = styled.SafeAreaView`
+  /* justify-content: flex-end; */
+`
 
 export const SubmitButton = styled(Button)`
   margin-top: 32px;

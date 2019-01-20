@@ -14,12 +14,11 @@ export const Card = styled.View`
   height: ${itemHeight}px;
   width: ${itemWidth}px;
 
-  /* box-shadow: 1px 11px 35px black; */
-  /* box-shadow: 1px 11px 35px 5px; */
-  shadow-color: #000;
-  shadow-offset: 0 0;
-  shadow-opacity: 0.2;
-  shadow-radius: 4px;
+  elevation: 4;
+  shadow-color: grey;
+  shadow-offset: 5px 5px;
+  shadow-opacity: 0.5;
+  shadow-radius: 10px;
 `
 
 export const ResultsContainer = styled.View`

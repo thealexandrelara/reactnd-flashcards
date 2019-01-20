@@ -15,6 +15,7 @@ import {
   ButtonsContainer
 } from "./styles"
 import Button from "./components/Button"
+import CardsList from "./components/CardsList"
 
 class DeckDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -22,6 +23,13 @@ class DeckDetail extends React.Component {
 
     return {
       headerTitle: ""
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.props.deck && prevProps.deck) {
+      const { navigation } = this.props
+      navigation.goBack()
     }
   }
 
@@ -35,7 +43,7 @@ class DeckDetail extends React.Component {
   }
 
   render() {
-    const { style, deck } = this.props
+    const { style, deck, deleteDeckRequest } = this.props
 
     if (!deck) {
       return (
@@ -77,9 +85,11 @@ class DeckDetail extends React.Component {
               iconLibrary="MaterialIcons"
               style={{ marginLeft: 4 }}
               type="danger"
+              onPress={() => deleteDeckRequest(deck.id)}
             />
           </ButtonsContainer>
         </ButtonsWrapper>
+        <CardsList cards={deck.cards} />
       </Container>
     )
   }

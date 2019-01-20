@@ -5,7 +5,7 @@ import UnstyledCardFlip from "react-native-card-flip"
 const itemHeight = Dimensions.get("window").height * 0.6
 
 export const CardFlip = styled(UnstyledCardFlip)`
-  /* flex: 1; */
+  flex: 1;
   justify-content: center;
   align-items: center;
 `
@@ -26,10 +26,12 @@ export const Card = styled.View`
 
   /* box-shadow: 1px 11px 35px black; */
   /* box-shadow: 1px 11px 35px 5px; */
-  shadow-color: #000;
-  shadow-offset: 0 0;
-  shadow-opacity: 0.2;
-  shadow-radius: 4px;
+
+  elevation: 4;
+  shadow-color: grey;
+  shadow-offset: 5px 5px;
+  shadow-opacity: 0.5;
+  shadow-radius: 10px;
 `
 export const AnswerText = styled.Text`
   font-weight: bold;
