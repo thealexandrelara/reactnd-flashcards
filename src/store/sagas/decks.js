@@ -13,6 +13,7 @@ export function* addInitialData() {
     const data = yield call([AsyncStorage, "getItem"], IS_USER_FIRST_TIME_KEY)
     const isUserFirstTime = JSON.parse(data)
 
+    // Populate with decks if is user first access
     if (!isUserFirstTime) {
       yield call(
         [AsyncStorage, "setItem"],
@@ -92,10 +93,10 @@ export function* deleteDeck(action) {
     const data = yield call([AsyncStorage, "getItem"], key)
     const decks = JSON.parse(data) || {}
 
+    // delete deck
     const newDecks = { ...decks }
     delete newDecks[deckId]
 
-    // Add card
     yield call(
       [AsyncStorage, "setItem"],
       key,
@@ -123,13 +124,6 @@ export function* deleteCard(action) {
         cards: decks[deckId].cards.filter(card => card.id !== cardId)
       }
     }
-
-    // console.log(
-    //   "CARDSIDS: ",
-    //   decks[deckId].cards.filter(card => card.id !== cardId)
-    // )
-    // console.log("CARDID: ", cardId)
-    // console.log("DELETE CARD: ", newDecks)
 
     // Add card
     yield call(

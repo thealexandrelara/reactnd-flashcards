@@ -40,9 +40,7 @@ class AddDeck extends React.Component {
     const id = uuid.v4().replace(/-/g, "")
     addDeckRequest({ id, title, timestamp: Date.now(), cards: [] }, id)
     navigation.goBack()
-    setTimeout(() => {
-      navigation.state.params.onAddDeck(id)
-    }, 300)
+    navigation.state.params.onAddDeck(id)
   }
 
   render() {
