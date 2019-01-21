@@ -98,7 +98,14 @@ class Quiz extends React.Component {
   }
 
   render() {
-    const { ...rest } = this.props
+    const {
+      navigation: {
+        state: {
+          params: { deck }
+        }
+      },
+      ...rest
+    } = this.props
     const { questions, cardIndex, isQuizFinished, correctAnswers } = this.state
 
     if (isQuizFinished) {
@@ -144,11 +151,10 @@ class Quiz extends React.Component {
           disableTopSwipe
           stackAnimationFriction={100}
         >
-          <Title>React</Title>
+          <Title>{deck.title}</Title>
           <Instructions>Tap on a card to check the answer</Instructions>
           {/* <Instructions>Swipe left to go to next question</Instructions> */}
         </Swiper>
-        <Title>React</Title>
       </Container>
     )
   }
