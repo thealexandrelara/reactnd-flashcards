@@ -1,6 +1,6 @@
 # **Flashcards**
 
-Terceiro projeto do Nanodegree de React da Udacity, construído com React Native.
+Terceiro projeto do Nanodegree de React da Udacity, construído com React Native. Usuários Android poderão testar usando o Expo em: https://expo.io/@alexandrelara/flashcards (infelizmente as diretrizes da Apple impedem usuários iOS de testarem os apps publicados com Expo).
 
 |Splash + Home|Add Deck|Add Card|
 |-|-|-|
