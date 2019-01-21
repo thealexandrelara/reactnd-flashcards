@@ -1,6 +1,14 @@
 # **Flashcards**
 
-Terceiro projeto do Nanodegree de React da Udacity, construindo com React Native.
+Terceiro projeto do Nanodegree de React da Udacity, construído com React Native.
+
+|Splash + Home|Add Deck|Add Card|
+|-|-|-|
+|<img src="https://i.imgur.com/fKhKZwB.gif" width="300"/>|<img src="https://i.imgur.com/DWCZ3w8.gif" width="300"/>|<img src="https://i.imgur.com/R4AAFhq.gif" width="300"/>|
+
+|Delete Deck|Delete Card|Start Quiz|
+|-|-|-|
+|<img src="https://i.imgur.com/zcAA82H.gif" width="300"/>|<img src="https://i.imgur.com/tBdMLZ5.gif" width="300"/>|<img src="https://i.imgur.com/ycb1BnA.gif" width="300"/>|
 
 ## Requisitos
 
