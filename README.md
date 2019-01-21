@@ -1,5 +1,3 @@
-![ReadableScreen](https://user-images.githubusercontent.com/20469356/50532185-815a7d80-0af4-11e9-941c-d9e6b9cab2e6.png)
-
 # **Flashcards**
 
 Terceiro projeto do Nanodegree de React da Udacity, construindo com React Native.
