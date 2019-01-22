@@ -1,24 +1,5 @@
 import { all, takeLatest } from "redux-saga/effects"
 
-// import PostsTypes from '../ducks/posts/types';
-// import {
-//   retrievePosts,
-//   retrieveSinglePost,
-//   voteInPost,
-//   addPost,
-//   editPost,
-//   deletePost,
-// } from './posts';
-
-// import CommentsTypes from '../ducks/comments/types';
-// import {
-//   retrieveComments,
-//   voteInComment,
-//   addComment,
-//   editComment,
-//   deleteComment,
-// } from './comments';
-
 import { Types as DecksTypes } from "../ducks/decks"
 import {
   retrieveDecks,
