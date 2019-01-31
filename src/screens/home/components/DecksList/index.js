@@ -44,14 +44,14 @@ const DecksList = props => {
         paddingRight: 16,
         paddingBottom: 176 + decks.length * 8 + (decks.length / 10) * 16
       }}
-      scrollEventThrottle={16} // <-- Use 1 here to make sure no events are ever missed
+      scrollEventThrottle={16}
       onScroll={Animated.event(
         [
           {
             nativeEvent: { contentOffset: { y: animatedValue } }
           }
         ],
-        { useNativeDriver: true } // <-- Add this
+        { useNativeDriver: true }
       )}
       style={style}
       data={decks}
